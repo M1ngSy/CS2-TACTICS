@@ -1,0 +1,58 @@
+[
+  {
+    "id": "dust2",
+    "name": "Dust2",
+    "nameCn": "炙热沙城2",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_f0f89e6f7b8346d49a40a8b0e84f3f32.jpg/w=400",
+    "difficulty": "入门",
+    "tacticCount": 8
+  },
+  {
+    "id": "mirage",
+    "name": "Mirage",
+    "nameCn": "荒漠迷城",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_52c0c9d29d6d4214a9e82a8e6c8e0f8c.jpg/w=400",
+    "difficulty": "入门",
+    "tacticCount": 7
+  },
+  {
+    "id": "inferno",
+    "name": "Inferno",
+    "nameCn": "炼狱小镇",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_3e8d5c6f7a9b4c1d8e2f6a0b9c8d7e6f.jpg/w=400",
+    "difficulty": "进阶",
+    "tacticCount": 6
+  },
+  {
+    "id": "nuke",
+    "name": "Nuke",
+    "nameCn": "核子危机",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.jpg/w=400",
+    "difficulty": "高级",
+    "tacticCount": 5
+  },
+  {
+    "id": "overpass",
+    "name": "Overpass",
+    "nameCn": "死亡游乐园",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c.jpg/w=400",
+    "difficulty": "高级",
+    "tacticCount": 5
+  },
+  {
+    "id": "ancient",
+    "name": "Ancient",
+    "nameCn": "远古遗迹",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f.jpg/w=400",
+    "difficulty": "进阶",
+    "tacticCount": 5
+  },
+  {
+    "id": "anubis",
+    "name": "Anubis",
+    "nameCn": "阿尼乌斯",
+    "thumbnail": "https://preview爆汁龙喷-99262.image.myqcloud.com/20250605/99262_5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c.jpg/w=400",
+    "difficulty": "入门",
+    "tacticCount": 4
+  }
+]

@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-primary text-text-primary font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-accent-cyan text-primary font-display font-semibold;
+    @apply border-2 border-accent-cyan;
+    @apply transition-all duration-300;
+    @apply hover:bg-transparent hover:text-accent-cyan;
+    @apply hover:shadow-[0_0_20px_rgba(0,212,255,0.5)];
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-transparent text-accent-cyan font-display font-semibold;
+    @apply border-2 border-accent-cyan;
+    @apply transition-all duration-300;
+    @apply hover:bg-accent-cyan hover:text-primary;
+  }
+
+  .card {
+    @apply bg-primary-secondary border border-primary-border;
+    @apply transition-all duration-300;
+    @apply hover:border-accent-cyan;
+    @apply hover:shadow-[0_0_30px_rgba(0,212,255,0.2)];
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-display font-bold text-text-primary;
+    @apply relative pb-4 mb-8;
+  }
+
+  .section-title::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-20 h-1 bg-accent-cyan;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8),
+                 0 0 20px rgba(0, 212, 255, 0.5),
+                 0 0 40px rgba(0, 212, 255, 0.3);
+  }
+
+  .neon-border {
+    @apply relative overflow-hidden;
+  }
+
+  .neon-border::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+  }
+
+  .neon-border:hover::before {
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a3a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00d4ff;
+}
