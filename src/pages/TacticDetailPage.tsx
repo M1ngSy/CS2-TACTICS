@@ -12,6 +12,10 @@ const tacticTypeConfig: Record<TacticType, { icon: typeof Crosshair; color: stri
   '沙地进攻': { icon: Map, color: 'text-accent-cyan', label: '沙地进攻' },
   'B区进攻': { icon: Flag, color: 'text-tactic-smoke', label: 'B区进攻' },
   'CT道具': { icon: Shield, color: 'text-tactic-grenade', label: 'CT道具' },
+  'A1进攻': { icon: Crosshair, color: 'text-tactic-fire', label: 'A1进攻' },
+  '飞二楼': { icon: Target, color: 'text-tactic-flash', label: '飞二楼' },
+  '链接进攻': { icon: Map, color: 'text-accent-cyan', label: '链接进攻' },
+  'A进攻': { icon: Crosshair, color: 'text-tactic-fire', label: 'A进攻' },
 };
 
 const difficultyColors: Record<string, string> = {

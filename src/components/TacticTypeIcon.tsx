@@ -12,6 +12,10 @@ export const tacticTypeConfig: Record<TacticType, { icon: typeof Crosshair; colo
   '沙地进攻': { icon: Map, color: 'text-accent-cyan', bgColor: 'bg-accent-cyan/20', label: '沙地进攻' },
   'B区进攻': { icon: Flag, color: 'text-tactic-smoke', bgColor: 'bg-tactic-smoke/20', label: 'B区进攻' },
   'CT道具': { icon: Shield, color: 'text-tactic-grenade', bgColor: 'bg-tactic-grenade/20', label: 'CT道具' },
+  'A1进攻': { icon: Crosshair, color: 'text-tactic-fire', bgColor: 'bg-tactic-fire/20', label: 'A1进攻' },
+  '飞二楼': { icon: Target, color: 'text-tactic-flash', bgColor: 'bg-tactic-flash/20', label: '飞二楼' },
+  '链接进攻': { icon: Map, color: 'text-accent-cyan', bgColor: 'bg-accent-cyan/20', label: '链接进攻' },
+  'A进攻': { icon: Crosshair, color: 'text-tactic-fire', bgColor: 'bg-tactic-fire/20', label: 'A进攻' },
 };
 
 export const TacticTypeIcon = ({ type, className = '' }: TypeIconProps) => {

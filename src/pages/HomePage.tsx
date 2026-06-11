@@ -1,19 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Zap, Target, Award } from 'lucide-react';
+import { ArrowRight, Play, Zap, Target } from 'lucide-react';
 import { maps } from '../data/maps';
-import { tactics } from '../data/tactics';
 import { MapCard } from '../components/MapCard';
-import { TacticCard } from '../components/TacticCard';
+
+const totalTactics = maps.reduce((sum, m) => sum + m.tacticCount, 0);
 
 const stats = [
-  { icon: Target, label: '教学点位', value: tactics.length },
+  { icon: Target, label: '教学点位', value: totalTactics },
   { icon: Zap, label: '覆盖地图', value: maps.length },
-  { icon: Award, label: '玩家受益', value: '50K+' },
 ];
 
 export const HomePage = () => {
-  const featuredTactics = tactics.slice(0, 4);
   const featuredMaps = maps.slice(0, 6);
 
   return (
@@ -66,8 +64,11 @@ export const HomePage = () => {
               <span className="text-text-primary">称霸赛场</span>
             </h1>
             
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto mb-10">
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto mb-2">
               专业的CS2投掷物教学平台，提供详细的道具点位、投掷技巧和战术应用指南，帮助你快速提升游戏水平。
+            </p>
+            <p className="font-bold text-accent-cyan mb-10">
+              作者：M1ngSy
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -75,11 +76,6 @@ export const HomePage = () => {
                 <Link to="/maps" className="btn-primary inline-flex items-center gap-2">
                   开始学习
                   <ArrowRight className="w-5 h-5" />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Link to="/maps" className="btn-secondary inline-flex items-center gap-2">
-                  浏览地图
                 </Link>
               </motion.div>
             </div>
@@ -146,21 +142,6 @@ export const HomePage = () => {
               </Link>
             </div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-20"
-          >
-            <h2 className="section-title">热门教学</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {featuredTactics.map((tactic) => (
-                <TacticCard key={tactic.id} tactic={tactic} />
-              ))}
-            </div>
-          </motion.div>
         </div>
       </section>
 
@@ -168,6 +149,9 @@ export const HomePage = () => {
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-text-secondary text-sm">
             CS2 TACTICS - 专业的CS2道具教学平台
+          </p>
+          <p className="text-text-secondary text-sm mt-1">
+            作者：M1ngSy
           </p>
         </div>
       </footer>

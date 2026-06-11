@@ -9,4 +9,12 @@ export const maps: Map[] = [
     difficulty: '入门',
     tacticCount: 36,
   },
+  {
+    id: 'inferno',
+    name: 'Inferno',
+    nameCn: '炼狱小镇',
+    thumbnail: '/images/inferno/inferno.png',
+    difficulty: '进阶',
+    tacticCount: 34,
+  },
 ];

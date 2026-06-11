@@ -6,12 +6,18 @@ import { maps } from '../data/maps';
 import { getTacticsByMap } from '../data/tactics';
 import { TacticType } from '../types';
 
-const categoryConfig: { key: TacticType; label: string; image: string; color: string }[] = [
-  { key: 'A大进攻', label: 'A大进攻', image: 'map-A-long.jpg', color: '#ff4d4d' },
-  { key: 'A小进攻', label: 'A小进攻', image: 'map-A-short.jpg', color: '#ffd700' },
-  { key: '沙地进攻', label: '沙地进攻', image: 'map-mid.jpg', color: '#00d4ff' },
-  { key: 'B区进攻', label: 'B区进攻', image: 'map-B.jpg', color: '#4ade80' },
-  { key: 'CT道具', label: 'CT道具', image: 'map-CT.jpg', color: '#ff8c00' },
+const dust2Categories: { key: TacticType; label: string; color: string }[] = [
+  { key: 'A大进攻', label: 'A大进攻', color: '#ff4d4d' },
+  { key: 'A小进攻', label: 'A小进攻', color: '#ffd700' },
+  { key: '沙地进攻', label: '沙地进攻', color: '#00d4ff' },
+  { key: 'B区进攻', label: 'B区进攻', color: '#4ade80' },
+  { key: 'CT道具', label: 'CT道具', color: '#ff8c00' },
+];
+
+const infernoCategories: { key: TacticType; label: string; color: string }[] = [
+  { key: 'A进攻', label: 'A进攻', color: '#ff4d4d' },
+  { key: 'B区进攻', label: 'B进攻', color: '#4ade80' },
+  { key: 'CT道具', label: 'CT道具', color: '#ff8c00' },
 ];
 
 export const MapDetailPage = () => {
@@ -22,7 +28,15 @@ export const MapDetailPage = () => {
 
   const map = maps.find((m) => m.id === mapId);
   const allTactics = getTacticsByMap(mapId || '');
+  const categories = mapId === 'inferno' ? infernoCategories : dust2Categories;
 
+  const getMarkerColor = (tactic: typeof allTactics[number]) => {
+    const isMulti = tactic.name.includes('，');
+    if (isMulti) return '#22c55e'; // 多个内容 → 绿色
+    if (tactic.name.includes('闪')) return '#3b82f6'; // 闪 → 蓝色
+    if (tactic.name.includes('烟')) return '#eab308'; // 烟 → 黄色
+    return '#ef4444'; // 其余 → 红色
+  };
   const countLines = (tactics: typeof allTactics) =>
     tactics.reduce((sum, t) => sum + t.name.split('，').length, 0);
 
@@ -31,12 +45,6 @@ export const MapDetailPage = () => {
     : allTactics.filter((t) => t.type === selectedType);
 
   const totalLines = countLines(allTactics);
-
-  const getColor = () => {
-    if (selectedType === 'all') return '#00d4ff';
-    const found = categoryConfig.find((c) => c.key === selectedType);
-    return found?.color || '#00d4ff';
-  };
 
   const handleMarkerClick = (id: string) => {
     setActiveId((prev) => (prev === id ? null : id));
@@ -58,7 +66,7 @@ export const MapDetailPage = () => {
     );
   }
 
-  const color = getColor();
+  const mapImage = mapId === 'dust2' ? '/images/dust2/map2.jpg' : `/images/${mapId}/inferno-map.jpg`;
 
   return (
     <div className="min-h-screen bg-primary">
@@ -77,14 +85,6 @@ export const MapDetailPage = () => {
           </Link>
 
           <div className="flex flex-col md:flex-row md:items-end gap-6">
-            <div className="relative w-full md:w-1/3 aspect-video rounded-lg overflow-hidden">
-              <img
-                src={map.thumbnail}
-                alt={map.nameCn}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-            </div>
             <div className="flex-1">
               <h1 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-2">
                 {map.nameCn}
@@ -120,7 +120,7 @@ export const MapDetailPage = () => {
             >
               全部 ({totalLines})
             </button>
-            {categoryConfig.map((cat) => {
+            {categories.map((cat) => {
               const count = countLines(allTactics.filter((t) => t.type === cat.key));
               return (
                 <button
@@ -149,17 +149,18 @@ export const MapDetailPage = () => {
           <div className="card rounded-xl overflow-hidden">
             <div className="relative w-full bg-primary-secondary">
               <img
-                src="/images/dust2/map2.jpg"
+                src={mapImage}
                 alt={`${map.nameCn} 平面图`}
                 className="w-full h-auto select-none"
                 draggable={false}
               />
 
-              {/* 道具点位 */}
+              {/* 正式道具点位 */}
               {filteredTactics.map((tactic) => {
                 const isActive = activeId === tactic.id;
                 const lines = tactic.name.split('，');
                 const videos = tactic.videos || [];
+                const markerColor = getMarkerColor(tactic);
 
                 return (
                   <div
@@ -169,7 +170,7 @@ export const MapDetailPage = () => {
                       left: `${tactic.x}%`,
                       top: `${tactic.y}%`,
                       transform: 'translate(-50%, -50%)',
-                      zIndex: 10,
+                      zIndex: isActive ? 50 : 10,
                     }}
                   >
                     {/* 标记圈 */}
@@ -183,7 +184,7 @@ export const MapDetailPage = () => {
                         style={{
                           width: '30px', height: '30px',
                           left: '-4px', top: '-4px',
-                          backgroundColor: color,
+                          backgroundColor: markerColor,
                           animationDuration: '2.5s',
                         }}
                       />
@@ -191,9 +192,9 @@ export const MapDetailPage = () => {
                         className="absolute top-0 left-0 rounded-full border-2 transition-transform group-hover:scale-110"
                         style={{
                           width: '22px', height: '22px',
-                          backgroundColor: `${color}30`,
-                          borderColor: color,
-                          boxShadow: `0 0 10px ${color}60`,
+                          backgroundColor: `${markerColor}30`,
+                          borderColor: markerColor,
+                          boxShadow: `0 0 10px ${markerColor}60`,
                         }}
                       />
                     </button>

@@ -3,7 +3,11 @@ export type TacticCategory =
   | 'A小进攻'
   | '沙地进攻'
   | 'B区进攻'
-  | 'CT道具';
+  | 'CT道具'
+  | 'A1进攻'
+  | '飞二楼'
+  | '链接进攻'
+  | 'A进攻';
 
 export interface Map {
   id: string;
