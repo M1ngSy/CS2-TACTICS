@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CS2 TACTICS - 道具教学</title>
+    <title>道具教学软件</title>
     <script type="module">
       if (import.meta.hot?.on) {
         import.meta.hot.on('vite:error', (error) => {
@@ -20,15 +20,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- GitHub Pages SPA 路由回退 -->
-    <script>
-      (function () {
-        const saved = sessionStorage.getItem('path');
-        if (saved && saved !== location.pathname) {
-          sessionStorage.removeItem('path');
-          window.history.replaceState(null, '', saved);
-        }
-      })();
-    </script>
   </body>
 </html>

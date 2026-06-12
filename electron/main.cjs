@@ -9,10 +9,11 @@ function createWindow() {
     height: 800,
     minWidth: 1024,
     minHeight: 600,
-    title: 'CS2 TACTICS - 道具教学',
+    title: '道具教学软件',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      webSecurity: false,
     },
   });
 

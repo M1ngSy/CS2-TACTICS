@@ -66,7 +66,7 @@ export const MapDetailPage = () => {
     );
   }
 
-  const mapImage = mapId === 'dust2' ? '/images/dust2/map2.jpg' : `/images/${mapId}/inferno-map.jpg`;
+  const mapImage = mapId === 'dust2' ? './images/dust2/map2.jpg' : `./images/${mapId}/inferno-map.jpg`;
 
   return (
     <div className="min-h-screen bg-primary">

@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 release
+electron-cache
+.venv
 
 # Editor directories and files
 .vscode/*
