@@ -30,12 +30,26 @@ export const MapDetailPage = () => {
   const allTactics = getTacticsByMap(mapId || '');
   const categories = mapId === 'inferno' ? infernoCategories : dust2Categories;
 
-  const getMarkerColor = (tactic: typeof allTactics[number]) => {
+  const redCircleNames = new Set(['黄墙火', '二箱火']);
+
+  const getMarkerImage = (tactic: typeof allTactics[number]) => {
+    // 特定覆盖
+    const overrides: Record<string, string | null> = {
+      '警家满封烟，棺材烟': './images/smoke.png',
+      '连接烟，书房烟': './images/smoke.png',
+      '黄墙火': null,
+      'B启动闪1，B启动闪2': './images/flash.jpg',
+      'A小中路反清': './images/flash.jpg',
+      'A小近点反清': './images/flash.jpg',
+      '二箱火': null,
+    };
+    if (tactic.name in overrides) return overrides[tactic.name];
+
     const isMulti = tactic.name.includes('，');
-    if (isMulti) return '#22c55e'; // 多个内容 → 绿色
-    if (tactic.name.includes('闪')) return '#3b82f6'; // 闪 → 蓝色
-    if (tactic.name.includes('烟')) return '#eab308'; // 烟 → 黄色
-    return '#ef4444'; // 其余 → 红色
+    if (isMulti) return null; // 多个内容 → 蓝色圆圈
+    if (tactic.name.includes('闪')) return './images/flash.jpg';
+    if (tactic.name.includes('烟')) return './images/smoke.png';
+    return './images/molotov.png'; // 其余 → 燃烧弹
   };
   const countLines = (tactics: typeof allTactics) =>
     tactics.reduce((sum, t) => sum + t.name.split('，').length, 0);
@@ -160,7 +174,8 @@ export const MapDetailPage = () => {
                 const isActive = activeId === tactic.id;
                 const lines = tactic.name.split('，');
                 const videos = tactic.videos || [];
-                const markerColor = getMarkerColor(tactic);
+                const markerImage = getMarkerImage(tactic);
+                const isRedCircle = !markerImage && redCircleNames.has(tactic.name);
 
                 return (
                   <div
@@ -184,19 +199,32 @@ export const MapDetailPage = () => {
                         style={{
                           width: '30px', height: '30px',
                           left: '-4px', top: '-4px',
-                          backgroundColor: markerColor,
+                          backgroundColor: markerImage ? '#00d4ff' : isRedCircle ? '#ef4444' : '#3b82f6',
                           animationDuration: '2.5s',
                         }}
                       />
-                      <div
-                        className="absolute top-0 left-0 rounded-full border-2 transition-transform group-hover:scale-110"
-                        style={{
-                          width: '22px', height: '22px',
-                          backgroundColor: `${markerColor}30`,
-                          borderColor: markerColor,
-                          boxShadow: `0 0 10px ${markerColor}60`,
-                        }}
-                      />
+                      {markerImage ? (
+                        <img
+                          src={markerImage}
+                          className="absolute top-0 left-0 rounded-full transition-transform group-hover:scale-110"
+                          style={{
+                            width: '22px', height: '22px',
+                            objectFit: 'cover',
+                          }}
+                          draggable={false}
+                          alt=""
+                        />
+                      ) : (
+                        <div
+                          className="absolute top-0 left-0 rounded-full border-2 transition-transform group-hover:scale-110"
+                          style={{
+                            width: '22px', height: '22px',
+                            backgroundColor: isRedCircle ? '#ef4444' : '#3b82f6',
+                            borderColor: isRedCircle ? '#ef4444' : '#3b82f6',
+                            boxShadow: isRedCircle ? '0 0 10px #ef444460' : '0 0 10px #3b82f660',
+                          }}
+                        />
+                      )}
                     </button>
 
                     {/* 弹出交互框 */}
